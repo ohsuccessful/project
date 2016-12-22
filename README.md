@@ -1,4 +1,3 @@
-# project
 nodejs开发微信扫码支付第二种模式。
 微信支付支付都需要什么动动手指头自己搜一下吧！这里不多说。本文只针对微信扫码支付第二种模式废话不多说上代码。
 路由：
@@ -13,11 +12,11 @@ router.get('/wxpayfind',order.wxpayfind);
 //跳转页面路由
 router.get('/wxpay_return',order.wxReturn);
 //页面：
-<div ng-controller="wxpay">
-    <h2>微信支付</h2>
-    <img src='请求你的生成二维码路由传一个id:<%-page%>'>
-</div>
-//js：
+//<div ng-controller="wxpay">
+//    <h2>微信支付</h2>
+//    <img src='请求你的生成二维码路由传一个id:<%-page%>'>
+//</div>
+js：
 app.controller('wxpay', function($scope, $http, $interval,$window) {
      var id = document.URL.split('?')[1].split('=')[1];
      var url = "/order/wxpayfind?id="+id;
