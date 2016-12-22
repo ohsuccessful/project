@@ -11,17 +11,18 @@ router.post('/wxnotify',order.wxnotify);
 router.get('/wxpayfind',order.wxpayfind);
 //跳转页面路由
 router.get('/wxpay_return',order.wxReturn);
-//页面：
-//<div ng-controller="wxpay">
-//    <h2>微信支付</h2>
-//    <img src='请求你的生成二维码路由传一个id:<%-page%>'>
-//</div>
+微信页面：
+<div ng-controller="wxpay">
+    <h2>微信支付</h2>
+    <img src='请求你的生成二维码路由传一个id:<%-page%>'>
+</div>
 js：
 app.controller('wxpay', function($scope, $http, $interval,$window) {
      var id = document.URL.split('?')[1].split('=')[1];
      var url = "/order/wxpayfind?id="+id;
      console.log(url)
-     var time = $interval(function(){
+     //定时请求
+         var time = $interval(function(){
          $http.get(url).success(function(r) {
              if(r==2){
                  console.log("错了");
@@ -69,7 +70,7 @@ exports.wxpay = (req, res) => {
             out_trade_no: docs.id, //订单号
             total_fee: docs.ttl + docs.sship.money, //付款金额
             body: _subject, //描述
-            notify_url: 'http://www.ldbauto.com/order/wxnotify/' //回调地址
+            notify_url: '' //回调地址
         };
         console.log(data);
         var code_url = "";//最终付款链接就是这个地址生成二维码
